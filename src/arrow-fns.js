@@ -61,6 +61,6 @@ function createGreetings(names) {
 function loudLongWords(words) {
     const fourLetterUpper = words.filter((word) => word.length > 4).map((word) => word.toUpperCase())
     return fourLetterUpper
-}
+} 
 
 export { addNums, createGreetings, evens, giveMeTwo, loudLongWords, max };
