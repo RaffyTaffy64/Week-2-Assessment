@@ -31,6 +31,41 @@
 // Ex.:
 //   buildWordChain(['zoo', 'sour', 'racket', 'octos']);
 //   => ['zoo', 'octos', 'sour', 'racket']
-function buildWordChain(words) {}
+function buildWordChain(words) {
+    if (words.length === 0) return []
 
-export { buildWordChain };
+    const result = [words[0]]
+    const wordMap = {}
+    words.forEach(word => {
+      const startLetter = word[0]
+      if (!wordMap[startLetter]) {
+        wordMap[startLetter] = []
+      }
+      wordMap[startLetter].push(word)
+    })
+
+    let currentWord = words[0]
+    const usedWords = new Set()
+    usedWords.add(currentWord)
+  
+    while (true) {
+      const lastLetter = currentWord[currentWord.length - 1]
+      const nextWords = wordMap[lastLetter]
+      let found = false
+      if (nextWords) {
+        for (const word of nextWords) {
+          if (!usedWords.has(word)) {
+            result.push(word)
+            usedWords.add(word)
+            currentWord = word
+            found = true
+            break
+          }
+        }
+      }
+      if (!found) break
+    }
+    return result
+  }
+
+export { buildWordChain }

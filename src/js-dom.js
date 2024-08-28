@@ -8,7 +8,16 @@
 // update and say "Log out". If a user clicks on the button again, its text
 // should switch from "Log Out" to "Log In".
 
-/// TODO: replace this with your code
+
+    const button = document.getElementById('authButton')
+    button.addEventListener('click', function() {
+        if (button.textContent === 'Log In') {
+            button.textContent = 'Log Out'
+        } else {
+            button.textContent = 'Log In'
+        }
+    })
+
 
 // Send an alert
 //
@@ -17,7 +26,15 @@
 // A user should be able to enter what they want the alert to say in the
 // text box. Then, they can submit the form to trigger the alert.
 
-/// TODO: replace this with your code
+    const form = document.getElementById('alertForm')
+    form.addEventListener('submit', function(event) {
+        event.preventDefault()
+        const messageInput = document.getElementById('message')
+        const message = messageInput.value
+        alert(message)
+        messageInput.value = ''
+    })
+
 
 // Add an item
 //
@@ -34,7 +51,16 @@
 //     <li>Item</li>  <!-- This was added after double-clicking -->
 //   </ol>
 
-/// TODO: replace this with your code
+
+    const addItemButton = document.getElementById('addItemButton')
+    const list = document.getElementById('list')
+    addItemButton.addEventListener('click', function() {
+        const newItem = document.createElement('li')
+        newItem.textContent = 'Item'
+        list.appendChild(newItem)
+    })
+
+
 
 // Change colors
 //
@@ -45,7 +71,22 @@
 // Clicking on "Turn Stuff Red" should make text red and clicking on "Turn
 // Stuff Blue" should make text blue.
 
-/// TODO: replace this with your code
+const turnRedButton = document.getElementById('turnRed')
+const turnBlueButton = document.getElementById('turnBlue')
+function changeColor(color) {
+    const elements = document.querySelectorAll('.changes-colors')
+    elements.forEach(element => {
+        element.style.color = color
+    })
+}
+turnRedButton.addEventListener('click', function() {
+    changeColor('red')
+})
+
+turnBlueButton.addEventListener('click', function() {
+    changeColor('blue')
+})
+
 
 // Calculate factorial
 //
@@ -62,7 +103,30 @@
 //   - calls your function that calculates a factorial
 //   - puts the result of the function inside the "result" span
 
-/// TODO: replace this with your code
+function factorial(n) {
+    if (n === 0 || n === 1) return 1;
+    let result = 1;
+    for (let i = 2; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+// Wait for the DOM to fully load
+
+    const numberInput = document.getElementById('numberInput')
+    const calculateButton = document.getElementById('calculateButton')
+    const resultSpan = document.getElementById('result')
+    calculateButton.addEventListener('click', function() {
+        const number = parseInt(numberInput.value, 10)
+        if (isNaN(number) || number < 0) {
+            resultSpan.textContent = 'Please enter a positive integer.'
+            return
+        }
+        const result = factorial(number)
+        resultSpan.textContent = `Factorial of ${number} is ${result}.`
+    })
+
 
 // Validate a form
 //
@@ -79,4 +143,20 @@
 // the feedback text to say "The word must be at least 4 characters long." and
 // change the color of the text to red..
 
-/// TODO: replace this with your code
+const form = document.getElementById('recommendationForm');
+const textarea = document.getElementById('wordInput');
+const feedback = document.getElementById('feedback');
+
+// Add submit event listener to the form
+
+    event.preventDefault()
+    const text = textarea.value
+    if (text.length >= 4) {
+        feedback.textContent = 'Thanks for your submission!'
+        feedback.style.color = 'green'
+    } else {
+        feedback.textContent = 'The word must be at least 4 characters long.'
+        feedback.style.color = 'red'
+    }
+
+
